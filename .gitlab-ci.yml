@@ -12,8 +12,8 @@ build:
     # test if mkp package exists
     - ls /opt/omd/sites/cmk/var/check_mk/packages_local/lmsensors2-*.mkp
     - mv /opt/omd/sites/cmk/var/check_mk/packages_local/lmsensors2-*.mkp .
+    # gitlab-runner exec docker --docker-volumes=${PWD}/artifacts:/output build
+    #- cp lmsensors2-*.mkp /output
   artifacts:
     paths:
-      - lmsensors2-*.mkp 
-
-
+      - lmsensors2-*.mkp
