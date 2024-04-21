@@ -2,16 +2,16 @@ stages:
   - build
 
 build:
-  image: checkmk/check-mk-raw:2.0.0p5
+  image: checkmk/check-mk-raw:2.4.0-2024.04.21
   stage: build
   before_script:
-    - su -c "mkdir -p ~/var/check_mk/packages/" -s /bin/sh cmk
+    - su -c "mkdir -p ~/var/check_mk/packages" -s /bin/sh cmk
     - su -c "./copy-to-target.sh" -s /bin/sh cmk
   script:
-    - su -c 'source ~/.bashrc; cmk -P pack lmsensors2' -s /bin/bash cmk
+    - su -c 'source ~/.bashrc; mkp package ~/var/check_mk/packages/lmsensors2' -s /bin/bash cmk
     # test if mkp package exists
-    - ls /omd/sites/cmk/lmsensors2-*.mkp
-    - mv /omd/sites/cmk/lmsensors2-*.mkp .
+    - ls /opt/omd/sites/cmk/var/check_mk/packages_local/lmsensors2-*.mkp
+    - mv /opt/omd/sites/cmk/var/check_mk/packages_local/lmsensors2-*.mkp .
   artifacts:
     paths:
       - lmsensors2-*.mkp 
